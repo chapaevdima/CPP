@@ -26,10 +26,10 @@ void PhoneBook::add()
 
 void PhoneBook::search()
 {
-    std::string str;
-    std::stringstream ss;
-    int index;
-    std::cout << "|-------------------------------------------|" << std::endl;
+	std::string str;
+	std::stringstream ss;
+	int index;
+	std::cout << "|-------------------------------------------|" << std::endl;
 	std::cout << "|     INDEX|FIRST NAME| LAST NAME|  NICKNAME|" << std::endl;
 	std::cout << "|-------------------------------------------|" << std::endl;
     for (int i = 0; i < this->max; i++)
