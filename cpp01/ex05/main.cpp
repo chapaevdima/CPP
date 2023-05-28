@@ -9,7 +9,7 @@ int main (void)
     {
     	std::cout << "Enter a level: ";
     	std::cin >> str;
-		harl.complain(str);
+		  harl.complain(str);
     }
 	return 0;
 }

@@ -13,6 +13,6 @@ HumanA::~HumanA()
 void HumanA::attack(void)
 {
     std::cout << this->name << " attacks with their " << this->_weapon.getType() << std::endl;
-    if (this->_weapon.getType() == "")
+    if (this->_weapon.getType().length() == 0)
         std::cout << "(type of his weapon is empty)" << std::endl;
 }

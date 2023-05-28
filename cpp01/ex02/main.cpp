@@ -11,7 +11,7 @@ int main (void)
     std::cout << "The memory address held by string reference: "<< &ref_str << std::endl;
 
     std::cout << "The value of the string variable:         " << str << std::endl;
-    std::cout << "TThe value pointed to by string pointer:  " << *ptr_str << std::endl;
+    std::cout << "The value pointed to by string pointer:  " << *ptr_str << std::endl;
     std::cout << "The value pointed to by string reference: "<< ref_str << std::endl;
     return 0;
 }

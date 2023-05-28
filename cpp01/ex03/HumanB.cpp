@@ -16,7 +16,7 @@ void HumanB::attack()
     if(this->weapon != NULL)
     {
         std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
-        if (this->weapon->getType() == "")
+        if (this->weapon->getType().length() == 0)
             std::cout << "(type of his weapon is empty)" << std::endl;
     }
     else 

@@ -16,6 +16,4 @@ public:
     void complain(std::string level);
 };
 
-typedef void(Harl::* func_ptr)(void);
-
 #endif
