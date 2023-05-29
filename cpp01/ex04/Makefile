@@ -8,6 +8,9 @@ HEADER = MySed.hpp
 
 OBJ		=	$(patsubst %.cpp, %.o, $(SRCS))
 
+%.o: %.cpp $(HEADER)
+	$(GCC) $(CFLAGS) -c $< -o $@
+
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)

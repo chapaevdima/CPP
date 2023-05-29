@@ -8,6 +8,9 @@ HEADER = Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
 
 OBJ		=	$(patsubst %.cpp, %.o, $(SRCS))
 
+%.o: %.cpp $(HEADER)
+	$(GCC) $(CFLAGS) -c $< -o $@
+
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
