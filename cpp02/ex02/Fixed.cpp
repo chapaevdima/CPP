@@ -60,9 +60,9 @@ float Fixed::toFloat(void) const
 	return static_cast<float>(this->fixed_point_value) / (1 << frac_bits);
 }
 
-std::ostream & operator<<(std::ostream & o, const Fixed & r)
+std::ostream & operator<<(std::ostream & o, const Fixed & rhs)
 {
-	o << r.toFloat();
+	o << rhs.toFloat();
 	return o;
 }
 
@@ -124,26 +124,26 @@ Fixed Fixed::operator/(const Fixed& rhs) const
 
 //=============================================
 
-Fixed& Fixed::operator++(void)
+Fixed& Fixed::operator++(void)  //prefix
 {
 	this->fixed_point_value += 1;
 	return *this;
 }
 
-Fixed Fixed::operator++(int)
+Fixed Fixed::operator++(int) //postfix
 {
 	Fixed tmp(*this);
 	this->fixed_point_value += 1;
 	return tmp;
 }
 
-Fixed& Fixed::operator--(void)
+Fixed& Fixed::operator--(void) //prefix
 {
 	this->fixed_point_value -= 1;
 	return *this;
 }
 
-Fixed Fixed::operator--(int)
+Fixed Fixed::operator--(int) //postfix
 {
 	Fixed tmp(*this);
 	this->fixed_point_value -= 1;
@@ -154,28 +154,28 @@ Fixed Fixed::operator--(int)
 
 Fixed& Fixed::max(Fixed& a, Fixed& b)
 {
-	if (a.toFloat() < b.toFloat())
+	if (a.getRawBits() < b.getRawBits())
 		return b;
 	return a;
 }
 
 Fixed& Fixed::min(Fixed& a, Fixed& b)
 {
-	if (a.toFloat() > b.toFloat())
+	if (a.getRawBits() > b.getRawBits())
 		return b;
 	return a;
 }
 
 const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
 {
-	if (a.toFloat() < b.toFloat())
+	if (a.getRawBits() < b.getRawBits())
 		return b;
 	return a;
 }
 
 const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 {
-	if (a.toFloat() > b.toFloat())
+	if (a.getRawBits() > b.getRawBits())
 		return b;
 	return a;
 }

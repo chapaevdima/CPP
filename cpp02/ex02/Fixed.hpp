@@ -46,6 +46,6 @@ public:
 	static const Fixed& max(const Fixed& a, const Fixed& b);
 };
 
-std::ostream & operator<<(std::ostream & o, const Fixed & i);
+std::ostream & operator<<(std::ostream & o, const Fixed & rhs);
 
 #endif

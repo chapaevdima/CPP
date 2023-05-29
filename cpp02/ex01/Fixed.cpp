@@ -60,8 +60,8 @@ float Fixed::toFloat(void) const
 	return static_cast<float>(this->fixed_point_value) / (1 << frac_bits);
 }
 
-std::ostream & operator<<(std::ostream & o, const Fixed & r)
+std::ostream & operator<<(std::ostream & o, const Fixed & rhs)
 {
-	o << r.toFloat();
+	o << rhs.toFloat();
 	return o;
 }
