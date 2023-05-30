@@ -44,6 +44,11 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::attack(const std::string& target)
 {
+	if (this->hp <= 0)
+	{
+		std::cout << this->name << " is dead" << std::endl;	
+		return;	
+	}
 	if (this->energy <= 0)
 	{
 		std::cout << this->name << " is out of energy" << std::endl;
@@ -55,6 +60,11 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
+	if (this->hp <= 0)
+	{
+		std::cout << this->name << " is dead" << std::endl;	
+		return;	
+	}
 	if (this->energy <= 0)
 	{
 		std::cout << this->name << " is out of energy" << std::endl;
