@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <exception>
+# include <cstdlib>
 
 template<typename T>
 class Array
@@ -38,7 +39,6 @@ public:
 
 	~Array<T>()
 	{
-		
 		delete [] array;
 	}
 
@@ -65,7 +65,7 @@ public:
 
 	T& operator[](unsigned int pos) const
 	{
-		if (pos > len)
+		if (pos >= len)
 			throw OutOfBoundsException();
 		return array[pos];
 	}
@@ -75,8 +75,5 @@ public:
 		return len;
 	}
 };
-
-
-
 
 #endif
