@@ -1,6 +1,6 @@
 NAME = animals
 GCC = c++
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 
@@ -8,13 +8,10 @@ HEADER = Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
 
 OBJ		=	$(patsubst %.cpp, %.o, $(SRCS))
 
-%.o: %.cpp $(HEADER)
-	$(GCC) $(CFLAGS) -c $< -o $@
-
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
-	$(GCC) $(CFLAGS) $(OBJ) -o $(NAME)	
+	$(GCC) $(CXXFLAGS) $(OBJ) -o $(NAME)	
 
 clean:
 	rm -f $(OBJ)
