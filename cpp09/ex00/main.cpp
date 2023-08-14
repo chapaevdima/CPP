@@ -24,7 +24,7 @@ bool isValidDateFormat(const std::string &dateStr) {
     int month = atoi(dateStr.substr(5, 2).c_str());
     int day = atoi(dateStr.substr(8, 2).c_str());
 
-    if (year < 1900 || year > 2023 || month < 1 || month > 12 || day < 1) {
+    if (year < 1900 || year > 4023 || month < 1 || month > 12 || day < 1) {
         return false;
     }
 
@@ -63,11 +63,11 @@ bool isValidExchangeRate(const std::string &exchangeRateStr) {
     return false;
 }
 
-bool isValidFile(const std::string &filename) {
+bool isValidDataFile(const std::string &filename) {
     std::ifstream inputFile(filename);
 
     if (!inputFile.is_open()) {
-        std::cout << "Не удалось открыть файл." << std::endl;
+        std::cout << "Error, could not open file." << std::endl;
         return false;
     }
 
@@ -120,16 +120,13 @@ bool isValidFile(const std::string &filename) {
     return true;
 }
 
-int main() {
-    std::string filename = "data.csv";
-
-    if (!isValidFile(filename)) {
-        return 1;
+void parsingData( std::map<std::string, float>& exchangeDataMap)
+{
+    std::ifstream inputFile("data.csv");
+    if (!inputFile.is_open()) {
+        std::cout << "Error, could not open file." << std::endl;
+        return;
     }
-
-    std::map<std::string, float> exchangeDataMap;
-
-    std::ifstream inputFile(filename);
     std::string firstLine;
     std::getline(inputFile, firstLine);
 
@@ -141,11 +138,119 @@ int main() {
             exchangeDataMap[dateStr] = static_cast<float>(atof(exchangeRateStr.c_str()));
         }
     }
+}
 
+void myPrint(const std::map<std::string, float>& exchangeDataMap, const std::string& line, float value)
+{
     std::map<std::string, float>::const_iterator it;
+    it = exchangeDataMap.begin();
+
+    if (line < it->first)
+    {
+        std::cout << line << " => 0 (no info)" << std::endl;
+        return;
+    }
+
+    for (; it != exchangeDataMap.end(); ++it)
+    {
+        if (it->first > line && it != exchangeDataMap.begin())
+        {
+            --it;
+            std::cout << line << " => " << it->second * value << std::endl;
+            return;
+        }
+
+        if (it->first == line)
+        {
+            std::cout << line << " => " << it->second * value << std::endl;
+            return;
+        }
+    }
+    
+    --it;
+    std::cout << line << " => " << it->second * value << std::endl;
+}
+
+bool checkLine(std::string line)
+{
+    if(isdigit(line[0]) == false || line[10] != ' ' || line[11] != '|' || line[12] != ' ' || (isdigit(line[13]) == false && line[13] != '-'))
+    {
+        return false;
+    }
+    return true;
+}
+
+void inputParsing(const std::map<std::string, float> exchangeDataMap, const std::string ifname)
+{
+    std::ifstream inputFile(ifname);
+    
+    if (!inputFile.is_open()) {
+        std::cout << "Error, could not open file." << std::endl;
+        return;
+    }
+
+    std::string line;
+    std::getline(inputFile, line);
+    if(line != "date | value")
+    {
+        std::cout << ifname << ": first line error" << std::endl;
+        return;
+    }
+
+    while(getline(inputFile, line))
+    {
+        std::istringstream ss(line);
+        std::string date;
+        float value;
+        char c;
+        if(checkLine(line) == true && ss >> date >> c >> value && ss.eof())
+        {
+            if (isValidDateFormat(date) == false)
+            {
+                std::cout << "Error: bad input => " << date << std::endl; 
+            }
+            else if (value < 0)
+            {
+                std::cout << "Error: not a positive number." << std::endl; 
+            }
+            else if (value > 1000)
+            {
+                std::cout << "Error: too large a number." << std::endl; 
+            }
+            else
+                myPrint(exchangeDataMap, date, value);
+        } else
+        {
+            std::cout << "Error: bad input: " << line <<std::endl;
+        }
+
+    }
+
+}
+
+int main(int argc, char **argv) {
+    if (argc != 2)
+    {
+        std::cout << "Error, could not open file." << std::endl;
+        return 1;
+    }
+
+    std::string ifname = argv[1];
+
+    if (!isValidDataFile("data.csv")) {
+        return 1;
+    }
+
+    std::map<std::string, float> exchangeDataMap;
+
+    parsingData(exchangeDataMap);
+
+    inputParsing(exchangeDataMap, ifname);
+
+    /*std::map<std::string, float>::const_iterator it;
     for (it = exchangeDataMap.begin(); it != exchangeDataMap.end(); ++it) {
         std::cout << "Дата: " << it->first << ", Курс обмена: " << it->second << std::endl;
-    }
+    }*/
 
     return 0;
 }
