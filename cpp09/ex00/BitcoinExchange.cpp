@@ -19,7 +19,7 @@ bool isValidDateFormat(const std::string &dateStr) {
     int month = atoi(dateStr.substr(5, 2).c_str());
     int day = atoi(dateStr.substr(8, 2).c_str());
 
-    if (year < 1900 || year > 4023 || month < 1 || month > 12 || day < 1) {
+    if (year < 1900 || year > 2023 || month < 1 || month > 12 || day < 1) {
         return false;
     }
 
@@ -69,7 +69,7 @@ bool isValidDataFile(const std::string &filename) {
     std::string firstLine;
     std::getline(inputFile, firstLine);
     if (firstLine != "date,exchange_rate") {
-        std::cout << "Файл некорректный: некорректная первая строка." << std::endl;
+        std::cout << "File is incorrect: incorrect first line." << std::endl;
         inputFile.close();
         return false;
     }
@@ -84,26 +84,26 @@ bool isValidDataFile(const std::string &filename) {
         if (std::getline(ss, dateStr, ',') && std::getline(ss, exchangeRateStr)) {
 
             if (!isValidDateFormat(dateStr)) {
-                std::cout << "Файл некорректный: строка " << lineNumber << " некорректный формат даты." << std::endl;
+                std::cout << "File is incorrect: line " << lineNumber << ": incorrect date format." << std::endl;
                 inputFile.close();
                 return false;
             }
 
             if (!isValidExchangeRate(exchangeRateStr)) {
-                std::cout << "Файл некорректный: строка " << lineNumber << " некорректный курс обмена." << std::endl;
+                std::cout << "File is incorrect: line" << lineNumber << ": incorrect exchange rate." << std::endl;
                 inputFile.close();
                 return false;
             }
 
             if (uniqueDates.find(dateStr) != uniqueDates.end()) {
-                std::cout << "Файл некорректный: строка " << lineNumber << " найден дубликат даты." << std::endl;
+                std::cout << "File is incorrect: line" << lineNumber << ": found a duplicate date." << std::endl;
                 inputFile.close();
                 return false;
             }
             uniqueDates.insert(dateStr);
             
         } else {
-            std::cout << "Файл некорректный: строка " << lineNumber << " некорректная строка." << std::endl;
+            std::cout << "File is incorrect: line" << lineNumber << ": incorrect line" << std::endl;
             inputFile.close();
             return false;
         }
@@ -204,11 +204,11 @@ void inputParsing(const std::map<std::string, float> exchangeDataMap, const std:
             {
                 std::cout << "Error: bad input => " << date << std::endl; 
             }
-            else if (value < 0)
+            else if (value < 0.0f)
             {
                 std::cout << "Error: not a positive number." << std::endl; 
             }
-            else if (value > 1000)
+            else if (value > 1000.0f)
             {
                 std::cout << "Error: too large a number." << std::endl; 
             }
