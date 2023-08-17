@@ -184,10 +184,7 @@ void ScalarConverter::doubleCast(const std::string& str, number& num)
 void ScalarConverter::floatCast(const std::string& str, number& num)
 {
 	std::cout << "called float cast" << std::endl;
-	std::stringstream ss;
-	ss << str;
-	if(!(ss >> num.f))
-		return;
+	num.f = std::atof(str.c_str());
 	num.is_f = true;
 
 	if (num.f >= static_cast<float>(std::numeric_limits<char>::min()) && num.f <= static_cast<float>(std::numeric_limits<char>::max()))
