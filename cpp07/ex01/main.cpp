@@ -4,7 +4,7 @@ int main (void)
 {
 	{
 		int array[] = {0, 239, 21, 42};
-		iter(array, 4, print);
+		iter(array, 4, print<const int>);
 		std::cout << std::endl;
 		iter(array, 4, increment);
 		iter(array, 4, print);

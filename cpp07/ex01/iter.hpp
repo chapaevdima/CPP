@@ -10,6 +10,13 @@ void iter(T *array, unsigned int size, void (*fun) (T& ))
 		fun(array[i]);	
 }
 
+template<typename T, typename P>
+void iter(T *array, unsigned int size, void (*fun) (P& ))
+{
+	for (unsigned int i = 0; i < size; i++)
+		fun(array[i]);	
+}
+
 template<typename T>
 void print(T& obj)
 {
