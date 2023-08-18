@@ -32,7 +32,7 @@ int main() {
 	mstack = mystack;
 
     std::cout << "Forward traversal:" << std::endl;
-    for (MutantStack<int>::iterator it = mystack.begin(); it != mystack.end(); it++) {
+    for (MutantStack<int>::const_iterator it = mystack.begin(); it != mystack.end(); ++it) {
         std::cout << *it << " ";
     }
     std::cout << std::endl;

@@ -37,7 +37,16 @@ void Span::addNumber(int num)
 
 void Span::addRange(std::vector<int> src)
 {
-	if(vec.size() + src.size() < n)
+	if(vec.size() + src.size() <= n)
+		vec.insert(vec.end(), src.begin(), src.end());
+	else
+		throw OutOfBoundsException();
+}
+
+void Span::addRange(std::vector<int>::iterator it1, std::vector<int>::iterator it2)
+{
+	std::vector<int> src(it1, it2);
+	if(vec.size() + src.size() <= n)
 		vec.insert(vec.end(), src.begin(), src.end());
 	else
 		throw OutOfBoundsException();

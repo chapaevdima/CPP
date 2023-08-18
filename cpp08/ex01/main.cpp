@@ -85,5 +85,18 @@ int main()
 		std::cout << e.what() << '\n';
 	}
 
+	try
+	{
+		Span span(20);
+		std::vector<int> nums(10);
+		span.addRange(nums);
+		span.addRange(nums.begin(), nums.end());
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
+
 	return 0;
 }

@@ -32,6 +32,7 @@ public:
 
 	void addNumber(int num);
 	void addRange(std::vector<int> src);
+	void addRange(std::vector<int>::iterator it1, std::vector<int>::iterator it2);
 	unsigned int shortestSpan();
 	unsigned int longestSpan();
 };
