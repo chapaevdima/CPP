@@ -20,10 +20,10 @@ private:
 	
 public:
 
-	Array<T>();
-	Array<T>(unsigned int n);
-	Array<T>(const Array<T>& src);
-	~Array<T>();
+	Array();
+	Array(unsigned int n);
+	Array(const Array<T>& src);
+	~Array();
 
 	Array<T>& operator=(const Array<T>& rhs);
 	T& operator[](int pos) const;
