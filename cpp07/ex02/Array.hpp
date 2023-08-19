@@ -26,7 +26,8 @@ public:
 	~Array();
 
 	Array<T>& operator=(const Array<T>& rhs);
-	T& operator[](int pos) const;
+	T& operator[](int pos);
+	const T& operator[](int pos) const;
 	
 	unsigned int size() const;
 };
@@ -85,7 +86,17 @@ Array<T>& Array<T>::operator=(const Array<T>& rhs)
 }
 
 template<typename T>
-T& Array<T>::operator[](int pos) const
+T& Array<T>::operator[](int pos) 
+{
+	if(pos < 0)
+		throw OutOfBoundsException();
+	if (static_cast<unsigned int>(pos) >= len)
+		throw OutOfBoundsException();
+	return array[pos];
+}
+
+template<typename T>
+const T& Array<T>::operator[](int pos) const
 {
 	if(pos < 0)
 		throw OutOfBoundsException();
