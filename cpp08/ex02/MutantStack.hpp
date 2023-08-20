@@ -14,9 +14,9 @@ public:
 	typedef typename container_type::reverse_iterator reverse_iterator;
 	typedef typename container_type::const_reverse_iterator const_reverse_iterator;
 
-	MutantStack() : std::stack<T>() {}
-	MutantStack(const MutantStack<T> &other) : std::stack<T>(other) {}
-	~MutantStack() {}
+	MutantStack();
+	MutantStack(const MutantStack<T> &other);
+	~MutantStack();
 
 	MutantStack<T> &operator=(const MutantStack<T> &other);
 	iterator begin();
@@ -28,6 +28,24 @@ public:
 	const_reverse_iterator rbegin() const;
 	const_reverse_iterator rend() const;
 };
+
+template <typename T>
+MutantStack<T>::MutantStack() : std::stack<T>()
+{
+
+}
+
+template <typename T>
+MutantStack<T>::MutantStack(const MutantStack<T> &other) : std::stack<T>(other)
+{
+
+}
+
+template <typename T>
+MutantStack<T>::~MutantStack()
+{
+
+}
 
 template <typename T>
 MutantStack<T> &MutantStack<T>::operator=(const MutantStack<T> &other)

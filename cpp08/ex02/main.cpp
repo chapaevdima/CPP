@@ -31,6 +31,9 @@ int main() {
 
 	mstack = mystack;
 
+	MutantStack<int> stk(mstack);
+	std::cout << stk.top() << std::endl;
+
     std::cout << "Forward traversal:" << std::endl;
     for (MutantStack<int>::const_iterator it = mystack.begin(); it != mystack.end(); ++it) {
         std::cout << *it << " ";

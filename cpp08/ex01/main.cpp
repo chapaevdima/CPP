@@ -73,7 +73,7 @@ int main()
 		std::srand(time(NULL));
 		std::generate(myvec.begin(), myvec.end(), std::rand);
 
-		Span span(myvec.size() + 1);
+		Span span(myvec.size());
 
 		span.addRange(myvec);
 
